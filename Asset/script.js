@@ -3,7 +3,7 @@ const quiz = document.getElementById('quizbox')
 const answersEls = document.querySelectorAll('.answer')
 const questionEls = document.getElementById('questiontext')
 const choiceEls = document.getElementById('choices')
-var commentEls = documemt.getElementById('comment')
+var commentEls = document.getElementById('comment')
 var timeEl = document.getElementById('timer')
 
 // const introscreen = document.getElementsByClassName('introduction')
@@ -54,26 +54,33 @@ function loadquiz() {
         var currentchoice = currentquizdata.choices[i]
         var choicebutton = document.createElement("button")
         choicebutton.setAttribute("value", currentchoice)
-        choicebutton.textContent = i + 1 + ". " + currentchoice
-        choiceEls.appendChild(choicebutton) 
-    
-    //add below function and the loadquiz doesnt work. 
-        choicebutton.addEventListener("click", function () {
-            for (var i = 0; i < quizdata.length; i++) {
-                if (choicebutton.textContent === correct.textContent) {
-                    currentquestion++;
-                    commentEls.textContent = "Correct!"
+        choicebutton.textContent = currentchoice
+        choiceEls.appendChild(choicebutton)
 
-                } else {
-                    currentquestion++;
-                    commentEls.textContent = "Wrong! The Correct Answer is " + quizdata[currentquestion].correct
-                }
+        console.log(currentquestion)
+
+
+        choicebutton.addEventListener("click", function () {
+
+            if (choicebutton.textContent == quizdata[currentquestion].correct) {
+                commentEls.textContent = "Correct!"
+                console.log(currentquestion)
+
+
+
+            } else {
+                commentEls.textContent = "Wrong! The Correct Answer is " + quizdata[currentquestion].correct
+                console.log(currentquestion)
+                console.log(choicebutton.textContent)
 
 
             }
+
+            currentquestion++;
+
         })
 
-    
+
     }
 
 }
