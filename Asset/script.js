@@ -3,6 +3,7 @@ const quiz = document.getElementById('quizbox')
 const answersEls = document.querySelectorAll('.answer')
 const questionEls = document.getElementById('questiontext')
 const choiceEls = document.getElementById('choices')
+var commentEls = documemt.getElementById('comment')
 var timeEl = document.getElementById('timer')
 
 // const introscreen = document.getElementsByClassName('introduction')
@@ -54,17 +55,35 @@ function loadquiz() {
         var choicebutton = document.createElement("button")
         choicebutton.setAttribute("value", currentchoice)
         choicebutton.textContent = i + 1 + ". " + currentchoice
-        choiceEls.appendChild(choicebutton)
+        choiceEls.appendChild(choicebutton) 
+    
+    //add below function and the loadquiz doesnt work. 
+        choicebutton.addEventListener("click", function () {
+            for (var i = 0; i < quizdata.length; i++) {
+                if (choicebutton.textContent === correct.textContent) {
+                    currentquestion++;
+                    commentEls.textContent = "Correct!"
+
+                } else {
+                    currentquestion++;
+                    commentEls.textContent = "Wrong! The Correct Answer is " + quizdata[currentquestion].correct
+                }
 
 
-    }
+            }
+        })
 
     
+    }
+
+}
+
+
 
 
 //add another for loop question, once selection is picked, the current question is chnanged
 
-}
+
 
 
 //button click, === correct, perceed to next 
