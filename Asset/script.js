@@ -6,9 +6,6 @@ const choiceEls = document.getElementById('choices')
 var commentEls = document.getElementById('comment')
 var timeEl = document.getElementById('timer')
 
-// const introscreen = document.getElementsByClassName('introduction')
-
-
 const quizdata = [
     {
         title: "1+1=__",
@@ -38,8 +35,6 @@ const quizdata = [
 let currentquestion = 0
 let score = 0
 
-
-
 function loadquiz() {
 
     var introscreen = document.getElementById('intro')
@@ -49,16 +44,13 @@ function loadquiz() {
     const questiontitle = document.getElementById('questiontext')
     questiontitle.textContent = currentquizdata.title
 
-
+    choiceEls.innerHTML = ""
     for (var i = 0; i < currentquizdata.choices.length; i++) {
         var currentchoice = currentquizdata.choices[i]
         var choicebutton = document.createElement("button")
         choicebutton.setAttribute("value", currentchoice)
         choicebutton.textContent = currentchoice
         choiceEls.appendChild(choicebutton)
-
-        // console.log(currentquestion)
-
         choicebutton.addEventListener("click", checkanswer)
 
 
@@ -69,30 +61,22 @@ function loadquiz() {
         var ans = event.target.textContent
         if (ans == quizdata[currentquestion].correct) {
             commentEls.textContent = "Correct!"
-            // console.log(currentquestion)
+            secondsLeft = secondsLeft + 10
+            score++;
+
         } else {
             commentEls.textContent = "Wrong! The Correct Answer is " + quizdata[currentquestion].correct
-            // console.log(currentquestion)
-            // console.log("choicebutton", ans)
+            secondsLeft = secondsLeft - 10 
+
         }
 
         currentquestion++;
         loadquiz();
 
-        //delete previous buttons     
-
-        // var previousChoice = quizdata[currentquestion - 1].choices
-
-        // previousChoice.setAttribute("style", "display:none")
-        console.log(quizdata[currentquestion - 1].choices)
 
     }
 
-
-
 }
-
-
 
 start.addEventListener("click", () => {
     loadquiz();
@@ -102,14 +86,14 @@ start.addEventListener("click", () => {
 
 )
 
-var secondsLeft = 60;
+var secondsLeft = 20;
 function setTime() {
 
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = "Time" + secondsLeft
 
-        if (secondsLeft === 0) {
+        if (secondsLeft <= 0) {
             clearInterval(timerInterval);
             sendMessage();
         }
@@ -118,8 +102,10 @@ function setTime() {
 }
 
 function sendMessage() {
-    //add display none to question content 
-    timeEl.textContent = "All done! Your final score is ";
+
+    quizbox.setAttribute("style","display:none")
+
+    timeEl.textContent = "All done! Your final score is " + score;
 
 }
 
