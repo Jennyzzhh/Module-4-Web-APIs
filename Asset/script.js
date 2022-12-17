@@ -57,43 +57,42 @@ function loadquiz() {
         choicebutton.textContent = currentchoice
         choiceEls.appendChild(choicebutton)
 
-        console.log(currentquestion)
+        // console.log(currentquestion)
 
-
-        choicebutton.addEventListener("click", function () {
-
-            if (choicebutton.textContent == quizdata[currentquestion].correct) {
-                commentEls.textContent = "Correct!"
-                console.log(currentquestion)
-
-
-
-            } else {
-                commentEls.textContent = "Wrong! The Correct Answer is " + quizdata[currentquestion].correct
-                console.log(currentquestion)
-                console.log(choicebutton.textContent)
-
-
-            }
-
-            currentquestion++;
-
-        })
+        choicebutton.addEventListener("click", checkanswer)
 
 
     }
 
+    function checkanswer(event) {
+
+        var ans = event.target.textContent
+        if (ans == quizdata[currentquestion].correct) {
+            commentEls.textContent = "Correct!"
+            // console.log(currentquestion)
+        } else {
+            commentEls.textContent = "Wrong! The Correct Answer is " + quizdata[currentquestion].correct
+            // console.log(currentquestion)
+            // console.log("choicebutton", ans)
+        }
+
+        currentquestion++;
+        loadquiz();
+
+        //delete previous buttons     
+
+        // var previousChoice = quizdata[currentquestion - 1].choices
+
+        // previousChoice.setAttribute("style", "display:none")
+        console.log(quizdata[currentquestion - 1].choices)
+
+    }
+
+
+
 }
 
 
-
-
-//add another for loop question, once selection is picked, the current question is chnanged
-
-
-
-
-//button click, === correct, perceed to next 
 
 start.addEventListener("click", () => {
     loadquiz();
@@ -119,6 +118,7 @@ function setTime() {
 }
 
 function sendMessage() {
+    //add display none to question content 
     timeEl.textContent = "All done! Your final score is ";
 
 }
