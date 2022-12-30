@@ -5,6 +5,8 @@ const questionEls = document.getElementById('questiontext')
 const choiceEls = document.getElementById('choices')
 var commentEls = document.getElementById('comment')
 var timeEl = document.getElementById('timer')
+var record = document.getElementById('recordtext')
+
 
 
 const quizdata = [
@@ -143,30 +145,70 @@ function enterinitial() {
 
     document.getElementsByTagName("body")[0].appendChild(form);
 
+    s.addEventListener("click", () => {
+        renderInitials()
+    
+    }
+    
+    )
 }
 
-    //store initials and scores
+    var userScoreSpan = document.querySelector("#user-score");
 
     function renderInitials() {
-        var initials = localStorage.getItem("initial") // local storge score and initials push to array - set item first - get item - sorting function()
-        var finalscore = localStorage.getItem("score")
+        var scoreRecord = localStorage.getItem("score")
+        localStorage.setItem("score", score);
 
-        if (!initials || !finalscore) {
-            return;
-          }
+        userScoreSpan.textContent = score;
 
     }
 
-    function viewSocre() {
-        var scoreRecord = document.createElement("h2")
-        scoreRecord.textContent = "High Scores"
-        var li = document.createElement("li")
-        // li.textcontent=
+
+
+    // function renderInitials() {
+
+    //         //store initials and scores
+    // let stringScores = JSON.stringify(score)
+    // console.log(stringScores)
+    // // let stringInitials = JSON.stringify(initial)
+
+    // localStorage.setItem("score",stringScores)
+    // // localStorage.setItem("initial",stringInitials)
+
+    // let returnScore = localStorage.getItem("score")
+    // let parseScore = JSON.parse(returnScore)
+
+    // let highscores = [
+    //     {
+    //         stringScores,
+    //         stringInitials
+    //     }
+    // ]
+
+    // let localStorageHighScore = JSON.stringify(highscores)
+    // localStorage.setItem("highscores", localStorageHighScore)
+    // let highscoresFromLocalStorage = localStorage.getItem("highscores")
+    // let highScoreParsed = JSON.parse(highscoresFromLocalStorage)
+
+    // record.textContent = highScoreParsed
+
+        // var initials = localStorage.getItem("initial") // local storge score and initials push to array - set item first - get item - sorting function()
+        // var finalscore = localStorage.getItem("score")
+
+        // if (!initials || !finalscore) {
+        //     return;
+        //   }
 
 
 
+    // function viewSocre() {
+    //     var scoreRecord = document.createElement("h2")
+    //     scoreRecord.textContent = "High Scores"
+    //     var li = document.createElement("li")
+    //     // li.textcontent=
 
-    }
+
+    // }
 
 
 //         console.log(initial.getAttribute("value"))
